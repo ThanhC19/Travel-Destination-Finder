@@ -1,0 +1,16 @@
+.search-section{
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.searchbar{
+    display: grid;
+    gap: 6px;
+}
+
+.trip-type{
+    display: grid;
+    gap:6px;
+}
