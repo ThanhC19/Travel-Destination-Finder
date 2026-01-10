@@ -2,3 +2,11 @@
   display: grid;
   padding: 10;
 }
+
+.map {
+  margin-top: 24px;
+}
+
+.pin{
+  opacity: 0.7;
+}

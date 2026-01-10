@@ -1,13 +1,13 @@
 import { useState, useMemo,  useEffect} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Searchbar from './components/searchbar/searchbar'
 import destinations from './data/destination'
+import MapView from './components/mapview/mapview'
 
 function App() {
   const [budget, setBudget] = useState("");
   const [tripType, setTripType] = useState("one-way")
+  const [selected, setSelected] = useState(null)
 
 
   const priceKey = tripType === "return" ? "returnPrice" : "oneWayPrice";
@@ -76,8 +76,16 @@ function App() {
               );
             })}
           </ul>)}
+
+
+      <h2 className='map'>MAP</h2>
+      <p className='pin'>
+      Selected:{selected ? `${selected.city}, ${selected.country}` : "None"}
+      </p>
+      <MapView destinations={filtered} selected={selected} onSelect={setSelected} />
+
         
-      <h2 className='Results'>Saved Trips</h2>
+      <h2 className='saved-trips'>Saved Trips</h2>
          
       {savedTrips.length === 0 ? (
         <p>No Saved Destinations Yet</p>
