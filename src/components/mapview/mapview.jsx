@@ -1,23 +1,26 @@
 import { MapContainer, TileLayer,Marker, Popup, useMap } from "react-leaflet";
 import "./mapview.css"
 
-function Flyto ({destination}) {
-    const map = useMap();
+function FlyTo({ destination }) {
+  const map = useMap();
 
-    if(destination) {
-        map.flyto([destination.lat, destination.lng],6,{duration:0.8})
-    }
-    return null
+  if (destination) {
+    map.flyTo([destination.lat, destination.lng], 6, { duration: 0.8 });
+  }
+
+  return null;
 }
+
 
 export default function MapView({destinations, selected, onSelect}){
     return(
         <div className="map">
         <MapContainer center={[48.8566,2.3522]} zoom={4} scrollWheelZoom style={{height:"100%", width:"100%"}}>
         <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; OpenStreetMap contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Flyto destination={selected}/>
+        <FlyTo destination={selected}/>
 
         {destinations.map((d) => (
             <Marker

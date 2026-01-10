@@ -78,7 +78,7 @@ function App() {
           </ul>)}
 
 
-      <h2 className='map'>MAP</h2>
+      <h2>MAP</h2>
       <p className='pin'>
       Selected:{selected ? `${selected.city}, ${selected.country}` : "None"}
       </p>
