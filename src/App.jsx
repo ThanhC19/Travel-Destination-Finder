@@ -76,7 +76,31 @@ function App() {
               );
             })}
           </ul>)}
-
+        
+      <h2 className='Results'>Saved Trips</h2>
+         
+      {savedTrips.length === 0 ? (
+        <p>No Saved Destinations Yet</p>
+      ) : (
+        <ul>
+          {savedTrips.map((d) => {
+           const price = d[priceKey];
+           return (
+            <li key = {d.id}>
+            <span>
+            {d.city}, {d.country} - £{price}
+            </span>
+            <button 
+            type="button"
+            onClick={() => toggleSave(d)}
+            aria-label="Unsave destination">
+             ★
+            </button>
+            </li>
+           )
+          })}
+        </ul>
+      )}
       </div>
     </>
   )
