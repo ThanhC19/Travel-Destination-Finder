@@ -82,7 +82,12 @@ function App() {
       <p className='pin'>
       Selected:{selected ? `${selected.city}, ${selected.country}` : "None"}
       </p>
-      <MapView destinations={filtered} selected={selected} onSelect={setSelected} />
+      <MapView destinations={filtered} 
+               selected={selected} 
+               onSelect={setSelected} 
+               savedTrips={savedTrips}
+               toggleSave={toggleSave}
+      />
 
         
       <h2 className='saved-trips'>Saved Trips</h2>
