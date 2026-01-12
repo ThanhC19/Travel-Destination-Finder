@@ -9,8 +9,6 @@ function App() {
   const [budget, setBudget] = useState("");
   const [tripType, setTripType] = useState("one-way")
   const [selected, setSelected] = useState(null)
-  
-
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   const priceKey = tripType === "return" ? "returnPrice" : "oneWayPrice";
