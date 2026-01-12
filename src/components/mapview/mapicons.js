@@ -1,11 +1,11 @@
 import L from "leaflet"
 
 const baseIcon = {
-    iconSize : [25, 41],
-    shadowSize : [50,64],
-    iconAnchor:[1, -34],
-    shadowSize: [41,41]
+    iconSize: [25, 41],       
+    shadowSize: [41, 41],
+    shadowAnchor: [12, 41]    
 }
+
 // Default (not saved)
 export const defaultIcon = new L.Icon({
   ...baseIcon,

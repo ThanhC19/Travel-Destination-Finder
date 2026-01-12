@@ -1,16 +1,77 @@
-.search-section{
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    flex-wrap: wrap;
+.search-section {
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
-.searchbar{
-    display: grid;
-    gap: 6px;
+.search-container {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  padding: 8px 16px;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  position: relative; 
+  z-index: 10;
 }
 
-.trip-type{
-    display: grid;
-    gap:6px;
+.search-container:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding: 8px 12px;
+}
+
+.input-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-stack label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.input-stack input, 
+.input-stack select {
+ appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.input-stack select option {
+  background-color: #1e1e1e; 
+  color: white;
+  padding: 10px;
+}
+
+.divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(128, 128, 128, 0.3);
+  margin: 0 10px;
+}
+
+.input-icon {
+  font-size: 1.2rem;
+}
+
+
+.search-glass-btn:hover {
+  transform: scale(1.1);
 }
