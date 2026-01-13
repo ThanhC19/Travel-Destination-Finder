@@ -1,16 +1,52 @@
-# React + Vite
+✈️ Budget Trip Finder
+A modern React application built with Vite that helps travelers find destinations within their budget, explore them on a live interactive map, and save their favorite trips for later.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Features
+Budget Filtering + Sorting: Filter destinations by a maximum budget and instantly sort results from cheapest to most expensive.
 
-Currently, two official plugins are available:
+Trip Type Toggle: Seamlessly switch between oneWayPrice and returnPrice to see accurate totals.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✨ Premium Picks: A curated section highlighting the top 5 best-value destinations within your current budget.
 
-## React Compiler
+Live Interactive Map: * Powered by React Leaflet.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Smooth fly-to animations when selecting destinations.
 
-## Expanding the ESLint configuration
+Custom markers (via mapicons.js) that change styles for saved trips.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Persistent Saved Trips: Save/unsave trips directly from the list or map. Data persists across sessions using LocalStorage with versioning to prevent data conflicts.
+
+Responsive Dark/Light Mode: Clean UI with consistent styling using CSS variables and data-theme.
+
+🛠️ Tech Stack
+Framework: React (Functional Components & Hooks)
+
+Build Tool: Vite
+
+Mapping: React Leaflet 
+
+Persistence: LocalStorage 
+
+Styling: CSS3 (Variables & Responsive Layout)
+
+📂 Project Structure
+src/
+├── assets/             # Destination images (Amsterdam, Tokyo, etc.)
+├── components/         # UI Components
+│   ├── mapview/        # Map logic, icons, and styling
+│   ├── premiumpicks/   # "Top Destinations" logic and styling
+│   └── searchbar/      # Search and budget filter logic
+├── data/               # Centralized destination data (destination.js)
+├── App.jsx             # Main application container
+└── main.jsx            # Entry point
+
+🚦 Getting Started
+Prerequisites
+Node.js (v18 or higher recommended)
+
+npm ### Installation & Setup
+
+1. Install dependencies:
+npm install
+2. Run the development server:
+npm run dev
