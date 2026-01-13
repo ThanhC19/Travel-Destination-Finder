@@ -3,10 +3,10 @@ import './App.css'
 import Searchbar from './components/searchbar/searchbar'
 import destinations from './data/destination'
 import MapView from './components/mapview/mapview'
-
+import PremiumPicks from './components/premiumpicks/premiumpicks'
 
 function App() {
-  const [budget, setBudget] = useState("");
+  const [budget, setBudget] = useState(0);
   const [tripType, setTripType] = useState("one-way")
   const [selected, setSelected] = useState(null)
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -18,21 +18,47 @@ function App() {
     return destinations
       .filter(d => d[priceKey] <= budget)
       .sort((a, b) => a[priceKey] - b[priceKey])
-  }, [budget, tripType])
+  }, [budget, priceKey])
+
+  const premiumPicks = useMemo(() => {
+  if (filtered.length === 0) return [];
+  return [...filtered].sort((a, b) => b[priceKey] - a[priceKey]).slice(0, 5);
+}, [filtered, priceKey]);
+
+const checkIsSaved = (id) => savedTrips.some((t) => t.id === id && t.type === tripType);
 
 
   const LS_KEY = "savedTrips"
+  const LS_VERSION_KEY = "savedTripsVersion"
+  const CURRENT_VERSION = "2"
+  
   const [savedTrips, setSavedTrips] = useState(() => {
+    const version = localStorage.getItem(LS_VERSION_KEY);
     const raw = localStorage.getItem(LS_KEY);
-    return raw ? JSON.parse(raw) : []
+    
+
+    if (version !== CURRENT_VERSION) {
+      localStorage.setItem(LS_VERSION_KEY, CURRENT_VERSION);
+      localStorage.removeItem(LS_KEY);
+      return [];
+    }
+    
+    if (!raw) return [];
+    return JSON.parse(raw);
   });
 
-  function toggleSave(destination) {
-    setSavedTrips((prev) => {
-      const exists = prev.some((d) => d.id === destination.id)
-      return exists ? prev.filter((d) => d.id !== destination.id) : [...prev, destination]
-    });
-  }
+ function toggleSave(destination) {
+  setSavedTrips((prev) => {
+    const exists = prev.some((t) => t.id === destination.id && t.type === tripType);
+    let newTrips;
+    if (exists) {
+      newTrips = prev.filter((t) => !(t.id === destination.id && t.type === tripType));
+    } else {
+      newTrips = [...prev, { ...destination, type: tripType, savedPrice: destination[priceKey] }];
+    }
+    return newTrips;
+  });
+}
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify(savedTrips))
@@ -45,7 +71,7 @@ function App() {
       <div className='page'>
         
         <header className="header">
-          <h1 className="title">Budget Trip Finder</h1>
+          <h1>Budget Trip Finder</h1>
           <button className="theme-toggle" onClick={() => setIsDarkMode(!isDarkMode)}>
             {isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
           </button>
@@ -58,6 +84,14 @@ function App() {
           setTripType={setTripType}
         />
 
+        <PremiumPicks 
+        trips={premiumPicks} 
+        onSelect={setSelected} 
+        priceKey={priceKey}
+        checkIsSaved={checkIsSaved}
+        toggleSave={toggleSave}
+      />
+
         <section className="main-content">
           <div className="results-container">
             <h2 className='results'>Results</h2>
@@ -67,7 +101,7 @@ function App() {
               <div className="card-grid">
                 {filtered.map((d) => {
                   const price = d[priceKey];
-                  const isSaved = savedTrips.some((t) => t.id === d.id)
+                  const isSaved = savedTrips.some((t) => t.id === d.id && t.type === tripType);
                   return (
                     <div key={d.id} className={`card ${selected?.id === d.id ? 'active' : ''}`} onClick={() => setSelected(d)}>
                       <div className="card-info">
@@ -97,6 +131,7 @@ function App() {
               savedTrips={savedTrips}
               toggleSave={toggleSave}
               priceKey={priceKey}
+              tripType={tripType}
             />
           </div>
         </section>
@@ -107,12 +142,17 @@ function App() {
             <h2>Saved Trips</h2>
             <div className="card-grid">
               {savedTrips.map((d) => (
-                <div key={d.id} className={`card saved-card ${selected?.id === d.id ? 'active' : ''}`} onClick={() => setSelected(d)}>
+                <div key={`${d.id}-${d.type}`} className={`card saved-card ${selected?.id === d.id ? 'active' : ''}`} onClick={() => setSelected(d)}>
                   <div className="card-info">
-                    <h3>{d.city}</h3>
-                    <span className="price">£{d[priceKey]}</span>
+                    <h3>{d.city} ({d.type})</h3>
+                    <span className="price">£{d.savedPrice}</span>
                   </div>
-                  <button onClick={() => toggleSave(d)}>★</button>
+                  <button 
+            className="save-btn saved"
+            onClick={(e) => { 
+              e.stopPropagation(); 
+              setSavedTrips(prev => prev.filter(t => !(t.id === d.id && t.type === d.type))); 
+            }}>★</button>
                 </div>
               ))}
             </div>

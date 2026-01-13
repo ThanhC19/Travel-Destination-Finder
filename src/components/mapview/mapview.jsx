@@ -4,6 +4,7 @@ import "./mapview.css";
 import { defaultIcon, savedIcon } from "./mapicons";
 import "leaflet/dist/leaflet.css";
 
+const DEFAULT_CENTER = [48.8566, 2.3522];
 
 function FlyTo({ destination }) {
   const map = useMap();
@@ -15,9 +16,8 @@ function FlyTo({ destination }) {
   return null;
 }
 
-export default function MapView({ destinations, selected, onSelect, priceKey, savedTrips, toggleSave }) {
-  const isSaved = (d) => savedTrips.some((t) => t.id === d.id);
-  
+export default function MapView({ destinations, selected, onSelect, priceKey, savedTrips, toggleSave, tripType }) {
+  const isSaved = (d) => savedTrips.some((t) => t.id === d.id && t.type === tripType);
   
   const markerRefs = useRef({});
 
@@ -30,9 +30,11 @@ export default function MapView({ destinations, selected, onSelect, priceKey, sa
   return (
     <div className="map-wrapper">
       <MapContainer 
-        center={[48.8566, 2.3522]} 
+        center={DEFAULT_CENTER} 
         zoom={4} 
         scrollWheelZoom 
+        zoomControl
+        touchZoom
         className="leaflet-container"
       >
         <TileLayer
@@ -43,7 +45,6 @@ export default function MapView({ destinations, selected, onSelect, priceKey, sa
         <FlyTo destination={selected} />
 
         {destinations.map((d) => {
-         
           const currentPrice = d[priceKey];
           return (
             <Marker

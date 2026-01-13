@@ -1,7 +1,7 @@
 .map-wrapper {
-  height: 550px;           
-  width: 85vw;            
-  max-width: 1400px;       
+  height: 700px;           
+  width: 95vw;            
+  max-width: 1600px;       
   border-radius: 20px;
   overflow: hidden; 
   box-shadow: var(--shadow);
@@ -13,7 +13,7 @@
 .leaflet-container {
   height: 100%;
   width: 100%;
-  background: #242424; 
+    background: #242424; 
 }
 
 

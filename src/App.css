@@ -18,14 +18,23 @@
 .app-container {
   background-color: var(--bg-color);
   color: var(--text-primary);
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none;
   transition: background 0.3s ease;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
+.app-container::-webkit-scrollbar {
+  display: none;
+}
+
 .page {
- width: 95%;          /* Let it take up most of the screen width */
-  max-width: 1600px;   
+  width: 95%;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 2rem;
   display: flex;
@@ -38,11 +47,6 @@
   align-items: center;
   margin-bottom: 2rem;
 }
-
-.title {
-  font-size: 30px;
-}
-
 
 .card-grid {
   display: grid !important; 
