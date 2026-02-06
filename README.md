@@ -1,6 +1,17 @@
 ✈️ Budget Trip Finder
 A modern React application built with Vite that helps travelers find destinations within their budget, explore them on a live interactive map, and save their favorite trips for later.
 
+Demo / Screenshots
+
+Demo video: [text](https://youtu.be/JsC6KJr8Htg?si=MaTbxUPbdMd3Quyj)
+
+Screenshots
+![light mode](image.png)
+![dark mode](image-1.png)
+![Top Destinations](image-2.png)
+![Results](image-3.png)
+![Live Map](image-4.png)
+
 🚀 Features
 Budget Filtering + Sorting: Filter destinations by a maximum budget and instantly sort results from cheapest to most expensive.
 
