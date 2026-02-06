@@ -3,7 +3,7 @@ A modern React application built with Vite that helps travelers find destination
 
 Demo / Screenshots
 
-Demo video: [text](https://youtu.be/JsC6KJr8Htg?si=MaTbxUPbdMd3Quyj)
+Demo video: [_Youtube Link_ ](https://youtu.be/JsC6KJr8Htg?si=MaTbxUPbdMd3Quyj)
 
 Screenshots
 ![light mode](image.png)
